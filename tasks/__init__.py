@@ -1,5 +1,6 @@
 from invoke import Collection
 
+from . import cluster
 from . import docker
 from . import format_code
 
@@ -20,6 +21,7 @@ from tasks.polybench import ns as polybench_ns
 logging.getLogger().setLevel(logging.DEBUG)
 
 ns = Collection(
+    cluster,
     docker,
     format_code,
 )
