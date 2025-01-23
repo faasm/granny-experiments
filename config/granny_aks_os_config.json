@@ -1,0 +1,13 @@
+{
+ "sysctls": {
+  "netCoreRmemMax": 16777216,
+  "netCoreWmemMax": 16777216,
+  "netIpv4TcpRmem": "4096 87380 16777216",
+  "netIpv4TcpWmem": "4096 65536 16777216",
+  "netCoreNetdevMaxBacklog": "30000",
+  "netCoreRmemDefault": 16777216,
+  "netCoreWmemDefault": 16777216,
+  "netIpv4TcpMem": "16777216 16777216 16777216",
+  "netIpv4RouteFlush": 1
+ }
+}

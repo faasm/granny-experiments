@@ -5,10 +5,19 @@ from subprocess import run
 
 HOME_DIR = expanduser("~")
 PROJ_ROOT = dirname(dirname(dirname(realpath(__file__))))
+CONFIG_DIR = join(PROJ_ROOT, "config")
 FAASM_ROOT = join(HOME_DIR, "faasm")
 SYSTEM_NAME = "Granny"
 
+AZURE_RESOURCE_GROUP = "faasm"
 ACR_NAME = "faasm.azurecr.io"
+AKS_CLUSTER_NAME = "faasm-cluster" # TODO: named based on $USER ?
+AKS_VM_SIZE = "Standard_DS5_v2"
+AKS_NODE_COUNT = 4
+AKS_REGION = "eastus"
+AZURE_PUB_SSH_KEY = "~/.ssh/id_rsa.pub"
+KUBECTL_BIN = join(PROJ_ROOT, "bin", "kubectl")
+
 FAABRIC_EXP_IMAGE_NAME = "faabric-experiments"
 
 NATIVE_BUILD_DIR = join(PROJ_ROOT, "build", "native")
