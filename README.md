@@ -1,22 +1,10 @@
 # Granny Experiments
 
-This repo contains the experiments for the [Granny paper](
-https://arxiv.org/abs/2302.11358).
+This repo contains the experiments for the [Granny paper](https://arxiv.org/abs/2302.11358).
 
-When following any instructions in this repository, it is recommended to
-have two open terminals:
-* One on the [`experiment-base`](https://github.com/faasm/experiment-base) repo
-  with the virtual environment activated (`source ./bin/workon.sh`). From now
-  onward, we will refer to this shell by its venv name: `faasm-exp-base`.
-* One with this repo and the virtual environment activated
-  (`source ./bin/workon.sh`). From now onward, we will refer to this shell by
-  its venv name: `faasm-exp-faabric`.
+When following any instructions in this repository, it is recommended to have a dedicated terminal with virtual environment of this repo activated: (`source ./bin/workon.sh`).
 
-The former is used to provision/deprovision K8s clusters on Azure (with AKS),
-and also to access low-level monitoring tools (we recommend `k9s`).
-
-The latter is used to deploy Faabric clusters, run the experiments, and plot
-the results.
+This virtual environment provides commands for provision/deprovision K8s clusters on Azure (with AKS), accessing low-level monitoring tools (we recommend `k9s`), and also commands for deploy Faabric clusters, run the experiments, and plot the results.
 
 ## Experiments in this repository
 
