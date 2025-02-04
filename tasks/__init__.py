@@ -3,6 +3,7 @@ from invoke import Collection
 from . import cluster
 from . import docker
 from . import format_code
+from . import k8s
 
 import logging
 
@@ -24,6 +25,7 @@ ns = Collection(
     cluster,
     docker,
     format_code,
+    k8s,
 )
 
 ns.add_collection(elastic_ns, name="elastic")

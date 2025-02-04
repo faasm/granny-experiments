@@ -1,4 +1,4 @@
-# ParRes Kernels Experiment (OpenMP)
+# ParRes Kernels Experiment - OpenMP (Fig.10)
 
 This experiment runs a set of the [ParRes Kernels](https://github.com/ParRes/Kernels)
 as a microbenchmark for Granny's OpenMP implementation.

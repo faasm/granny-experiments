@@ -1,17 +1,21 @@
 from os.path import dirname, realpath, expanduser, join, exists
 from shutil import rmtree
-from os import makedirs
+from os import getenv, makedirs
 from subprocess import run
 
 HOME_DIR = expanduser("~")
 PROJ_ROOT = dirname(dirname(dirname(realpath(__file__))))
+BIN_DIR = join(PROJ_ROOT, "bin")
+GLOBAL_BIN_DIR = "/usr/local/bin"
 CONFIG_DIR = join(PROJ_ROOT, "config")
 FAASM_ROOT = join(HOME_DIR, "faasm")
 SYSTEM_NAME = "Granny"
 
+K9S_VERSION = "0.32.2"
+
 AZURE_RESOURCE_GROUP = "faasm"
 ACR_NAME = "faasm.azurecr.io"
-AKS_CLUSTER_NAME = "faasm-cluster" # TODO: named based on $USER ?
+AKS_CLUSTER_NAME = getenv('USER') + "-faasm-cluster"
 AKS_VM_SIZE = "Standard_DS5_v2"
 AKS_NODE_COUNT = 4
 AKS_REGION = "eastus"

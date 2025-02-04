@@ -1,4 +1,4 @@
-# Elastic Scaling Micro-Benchmark
+# Elastic Scaling Micro-Benchmark (Fig.12)
 
 In this experiment we measure the benefits of elastically scaling-up OpenMP
 applications to benefit from idle resources. We run a pipe-lined algorithm
@@ -43,6 +43,12 @@ You may now plot the results using:
 ```bash
 inv elastic.plot
 ```
+
+the plot will be available in [`./plots/elastic/elastic_speedup.pdf`](
+./plots/elastic/elastic_speedup.pdf), we also include it below:
+
+![Elastic Scaling Plot](./plots/elastic/elastic_speedup.png)
+
 
 ## Clean-Up
 

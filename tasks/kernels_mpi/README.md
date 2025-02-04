@@ -1,4 +1,4 @@
-# ParRes Kernels Experiment (MPI)
+# ParRes Kernels Experiment - MPI (Fig.9b)
 
 This experiment runs a set of the [ParRes Kernels](https://github.com/ParRes/Kernels)
 as a microbenchmark for Granny's MPI implementation.
