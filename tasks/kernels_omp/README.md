@@ -63,10 +63,9 @@ To plot the results, just run:
 inv kernels-omp.plot
 ```
 
-the plot will be available in [`./plots/kernels-omp/openmp_kernels_slowdown.pdf`](
-./plots/kernels-omp/openmp_kernels_slowdown.pdf), we also include it below:
+the plot will be available in [`/plots/kernels-omp/openmp_kernels_slowdown.pdf`](/plots/kernels-omp/openmp_kernels_slowdown.pdf), we also include it below:
 
-![OpenMP Kernels Slowdown Plot](./plots/kernels-omp/openmp_kernels_slowdown.png)
+![OpenMP Kernels Slowdown Plot](/plots/kernels-omp/openmp_kernels_slowdown.png)
 
 ## Clean-up
 

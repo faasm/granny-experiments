@@ -63,10 +63,9 @@ To plot the results, just run:
 inv kernels-mpi.plot
 ```
 
-the plot will be available in [`./plots/kernels-mpi/mpi_kernels_slowdown.pdf`](
-./plots/kernels-mpi/mpi_kernels_slowdown.pdf), we also include it below:
+the plot will be available in [`/plots/kernels-mpi/mpi_kernels_slowdown.pdf`](/plots/kernels-mpi/mpi_kernels_slowdown.pdf), we also include it below:
 
-![MPI Kernels Slowdown Plot](./plots/kernels-mpi/mpi_kernels_slowdown.png)
+![MPI Kernels Slowdown Plot](/plots/kernels-mpi/mpi_kernels_slowdown.png)
 
 ## Clean-up
 

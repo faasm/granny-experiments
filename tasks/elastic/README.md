@@ -44,10 +44,9 @@ You may now plot the results using:
 inv elastic.plot
 ```
 
-the plot will be available in [`./plots/elastic/elastic_speedup.pdf`](
-./plots/elastic/elastic_speedup.pdf), we also include it below:
+the plot will be available in [`/plots/elastic/elastic_speedup.pdf`](/plots/elastic/elastic_speedup.pdf), we also include it below:
 
-![Elastic Scaling Plot](./plots/elastic/elastic_speedup.png)
+![Elastic Scaling Plot](/plots/elastic/elastic_speedup.png)
 
 
 ## Clean-Up
