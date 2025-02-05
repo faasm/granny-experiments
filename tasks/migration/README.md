@@ -1,4 +1,4 @@
-# Migration Experiment
+# Migration Experiment (Fig.11)
 
 This experiment explores the benefits of migrating the execution of scientific
 applications to benefit from dynamic changes in the compute environment.
@@ -24,7 +24,7 @@ inv migration.wasm.upload
 Third, run the experiments:
 
 ```bash
-inv migration.run -w compute -w network
+inv migration.run -w all-to-all -w very-network
 ```
 
 Lastly, plot the results:
