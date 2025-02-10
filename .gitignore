@@ -13,8 +13,8 @@ venv/
 *.egg-info/
 
 # Plots and results (uncomment once results are stable, and publicly available)
-plots/
-results/
+#plots/
+#results/
 
 # Kubernetes
 .kube/

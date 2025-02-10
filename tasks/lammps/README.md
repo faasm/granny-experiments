@@ -5,11 +5,10 @@ as part of the array experiment.
 
 ## Start AKS cluster
 
-In the `experiment-base` terminal, run:
+Create a new cluster:
 
 ```bash
-inv cluster.provision --vm Standard_D8_v5 --nodes 3
-inv cluster.credentials
+inv cluster.provision --vm Standard_D8_v5 --nodes 3 cluster.credentials
 ```
 
 ## Granny

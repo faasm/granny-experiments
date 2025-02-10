@@ -1,6 +1,7 @@
 from glob import glob
 from invoke import task
 from matplotlib.pyplot import hlines, subplots
+from os import makedirs
 from numpy import arange
 from os.path import join
 from pandas import read_csv
@@ -48,6 +49,7 @@ def plot(ctx):
     Plot migration figure
     """
     migration_results = _read_results()
+    makedirs(MIGRATION_PLOTS_DIR, exist_ok=True)
 
     do_plot("all-to-all", migration_results)
     # do_plot("compute", migration_results)
