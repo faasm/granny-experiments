@@ -12,10 +12,6 @@ __pycache__/
 venv/
 *.egg-info/
 
-# Plots and results (uncomment once results are stable, and publicly available)
-#plots/
-#results/
-
 # Kubernetes
 .kube/
 
