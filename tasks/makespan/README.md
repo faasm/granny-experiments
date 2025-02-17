@@ -70,4 +70,7 @@ To plot the results, just run:
 # TODO: this does not work atm
 # TODO: move from tasks/motivation/plot.py
 inv makespan.plot.migration
+inv makespan.plot.locality
+inv makespan.plot.spot
+inv makespan.plot.elastic
 ```

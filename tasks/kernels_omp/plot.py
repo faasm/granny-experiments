@@ -1,6 +1,7 @@
 from glob import glob
 from invoke import task
 from matplotlib.pyplot import subplots
+import matplotlib.pyplot as plt
 from os import makedirs
 from os.path import join
 from pandas import read_csv
@@ -12,6 +13,16 @@ from tasks.util.kernels import (
 )
 from tasks.util.plot import UBENCH_PLOT_COLORS, SINGLE_COL_FIGSIZE, save_plot
 
+plt.rcParams.update({
+    "text.usetex": True,            # Use LaTeX for all text
+    "font.family": "serif",         # Use serif fonts (like LaTeX default)
+    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
+    "axes.labelsize": 12,           # Font size for axes labels
+    "font.size": 12,                # General font size
+    "legend.fontsize": 12,          # Font size for legend
+    "xtick.labelsize": 10,          # Font size for x tick labels
+    "ytick.labelsize": 10           # Font size for y tick labels
+})
 
 def _read_results():
     result_dict = {}
@@ -87,6 +98,7 @@ def plot(ctx):
             label=kernel,
             color=UBENCH_PLOT_COLORS[ind_kernel],
             edgecolor="black",
+            zorder=3
         )
 
     # Labels
@@ -96,7 +108,7 @@ def plot(ctx):
     # Horizontal line at slowdown of 1
     xlim_left = -(0.5 + width)
     xlim_right = len(nprocs) - 0.5
-    ax.hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red")
+    ax.hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red", zorder=4)
 
     ax.set_xlim(left=xlim_left, right=xlim_right)
     ax.set_ylim(bottom=0, top=ymax)
@@ -105,5 +117,6 @@ def plot(ctx):
     ax.legend(
         loc="upper right", ncol=5, bbox_to_anchor=(1.00, 1.17), fontsize=9
     )
+    ax.grid(zorder=0)
 
     save_plot(fig, OPENMP_KERNELS_PLOTS_DIR, "openmp_kernels_slowdown")

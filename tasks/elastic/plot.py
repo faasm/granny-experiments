@@ -1,6 +1,7 @@
 from glob import glob
 from invoke import task
 from matplotlib.pyplot import subplots
+import matplotlib.pylab as plt
 from os import makedirs
 from os.path import join
 from pandas import read_csv
@@ -10,6 +11,17 @@ from tasks.util.plot import (
     get_color_for_baseline,
     save_plot,
 )
+
+plt.rcParams.update({
+    "text.usetex": True,            # Use LaTeX for all text
+    "font.family": "serif",         # Use serif fonts (like LaTeX default)
+    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
+    "axes.labelsize": 12,           # Font size for axes labels
+    "font.size": 12,                # General font size
+    "legend.fontsize": 12,          # Font size for legend
+    "xtick.labelsize": 10,          # Font size for x tick labels
+    "ytick.labelsize": 10           # Font size for y tick labels
+})
 
 
 def _read_results():
@@ -61,6 +73,7 @@ def plot(ctx):
         ys,
         color=get_color_for_baseline("omp-elastic", "granny"),
         edgecolor="black",
+        zorder=3
     )
 
     # Labels
@@ -69,11 +82,12 @@ def plot(ctx):
     # Horizontal line at slowdown of 1
     xlim_left = 0.5
     xlim_right = len(xs) + 0.5
-    ax.hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red")
+    ax.hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red", zorder=4)
 
     ax.set_xlim(left=xlim_left, right=xlim_right)
     ax.set_ylim(bottom=0)
     ax.set_xlabel("Number of OpenMP threads")
     ax.set_ylabel("Speed-Up \n [No-Elastic / Elastic]")
+    ax.grid(zorder=0)
 
     save_plot(fig, ELASTIC_PLOTS_DIR, "elastic_speedup")

@@ -1,0 +1,2 @@
+TaskId,SchedulingDecision
+10.244.5.2,aks-nodepool1-24370856-vmss000006,10.244.4.2,aks-nodepool1-24370856-vmss000004,10.244.2.2,aks-nodepool1-24370856-vmss000007,10.244.7.2,aks-nodepool1-24370856-vmss000003,10.244.8.2,aks-nodepool1-24370856-vmss000005,10.244.3.2,aks-nodepool1-24370856-vmss000000,10.244.6.2,aks-nodepool1-24370856-vmss000002,10.244.1.8,aks-nodepool1-24370856-vmss000001

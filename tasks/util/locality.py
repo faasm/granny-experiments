@@ -376,7 +376,7 @@ def _do_plot_exec_vs_tiq(results, ax, **kwargs):
     ymin = 0.75
     ymax = 2
 
-    ax.bar(xs, ys, width=width, color=colors, edgecolor="black")
+    ax.bar(xs, ys, width=width, color=colors, edgecolor="black", zorder=3)
     ax.hlines(y=1, color="red", xmin=xmin, xmax=xmax)
     ax.vlines(
         xs_vlines,
@@ -396,6 +396,7 @@ def _do_plot_exec_vs_tiq(results, ax, **kwargs):
     )
     ax.set_xlim(left=xmin, right=xmax)
     ax.set_ylim(bottom=ymin, top=ymax)
+    ax.grid(zorder=0)
 
 
 def _do_plot_exec_cdf(results, ax, **kwargs):
@@ -443,6 +444,7 @@ def _do_plot_exec_cdf(results, ax, **kwargs):
         ax.set_ylabel("CDF")
         ax.set_ylim(bottom=0, top=1)
         ax.legend()
+        ax.grid(zorder=0)
 
 
 def _do_plot_makespan(results, ax, **kwargs):
@@ -473,10 +475,11 @@ def _do_plot_makespan(results, ax, **kwargs):
         ys.append(0)
         colors.append("white")
 
-    ax.bar(xs, ys, color=colors, edgecolor="black", width=1)
+    ax.bar(xs, ys, color=colors, edgecolor="black", width=1, zorder=3)
     ax.set_ylim(bottom=0)
     ax.set_ylabel("Makespan [s]")
     ax.set_xticks(xticks, labels=xticklabels)
+    ax.grid(zorder=0)
 
 
 def _do_plot_ts_vcpus(results, ax, **kwargs):
@@ -508,8 +511,9 @@ def _do_plot_ts_vcpus(results, ax, **kwargs):
 
     ax.set_xlim(left=0, right=xlim)
     ax.set_ylim(bottom=0, top=100)
-    ax.set_ylabel("% idle vCPUs")
+    ax.set_ylabel(r'\% idle vCPUs')
     ax.set_xlabel("Time [s]")
+    ax.grid(zorder=0)
 
 
 def _do_plot_ts_xvm_links(results, ax, **kwargs):
@@ -562,7 +566,8 @@ def _do_plot_ts_xvm_links(results, ax, **kwargs):
     ax.set_xlim(left=0, right=xlim)
     ax.set_ylim(bottom=0)
     ax.set_xlabel("Time [s]")
-    ax.set_ylabel("# cross-VM links")
+    ax.set_ylabel(r'\# cross-VM links')
+    ax.grid(zorder=0)
 
 
 def _do_plot_percentage_vcpus(results, ax, **kwargs):
@@ -627,8 +632,9 @@ def _do_plot_percentage_vcpus(results, ax, **kwargs):
 
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=-0.25)
-    ax.set_ylabel("Idle CPU-seconds /\n Total CPU-seconds [%]", fontsize=8)
+    ax.set_ylabel(r'Idle CPU-seconds \\ Total CPU-seconds [\%]', fontsize=8)
     ax.set_xticks(xs, labels=xticklabels)
+    ax.grid(zorder=0)
 
 
 def _do_plot_percentage_xvm(results, ax, **kwargs):
@@ -690,6 +696,7 @@ def _do_plot_percentage_xvm(results, ax, **kwargs):
     ax.set_xlim(left=-0.25)
     ax.set_ylabel("Total cross-VM / Optimal cross-VM links", fontsize=8)
     ax.set_xticks(xs, labels=xticklabels)
+    ax.grid(zorder=0)
 
 
 def _do_plot_cdf_jct(results, ax, **kwargs):
@@ -718,6 +725,7 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
         ax.set_xlabel("Job Completion Time [s]")
         ax.set_ylabel("CDF")
         ax.set_ylim(bottom=0, top=1)
+        ax.grid(zorder=0)
 
 
 def plot_locality_results(plot_name, results, ax, **kwargs):

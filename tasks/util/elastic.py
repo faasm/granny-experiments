@@ -224,11 +224,12 @@ def _do_plot_makespan(results, ax, **kwargs):
             ys.append(0)
             colors.append("white")
 
-    ax.bar(xs, ys, color=colors, edgecolor="black", width=1)
+    ax.bar(xs, ys, color=colors, edgecolor="black", width=1, zorder=3)
     ax.set_ylim(bottom=0)
     ax.set_ylabel("Makespan [s]")
 
     ax.set_xticks(xticks, labels=xticklabels)
+    ax.grid(zorder=0)
 
 
 def _do_plot_cdf_jct(results, ax, **kwargs):
@@ -266,6 +267,7 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
         ax.set_xlabel("Job Completion Time [s]")
         ax.set_ylabel("CDF")
         ax.set_ylim(bottom=0, top=1)
+        ax.grid(zorder=0)
 
 
 def _do_plot_percentage_vcpus(results, ax, **kwargs):
@@ -327,8 +329,9 @@ def _do_plot_percentage_vcpus(results, ax, **kwargs):
 
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=-0.25)
-    ax.set_ylabel("Idle CPU-seconds /\n Total CPU-seconds [%]")
+    ax.set_ylabel(r'Idle CPU-seconds \\ Total CPU-seconds [\%]')
     ax.set_xticks(xs, labels=xticklabels)
+    ax.grid(zorder=0)
 
 
 def _do_plot_ts_vcpus(results, ax, **kwargs):
@@ -356,8 +359,9 @@ def _do_plot_ts_vcpus(results, ax, **kwargs):
 
     ax.set_xlim(left=0, right=xlim)
     ax.set_ylim(bottom=0, top=100)
-    ax.set_ylabel("% idle vCPUs")
+    ax.set_ylabel(r'\% idle vCPUs')
     ax.set_xlabel("Time [s]")
+    ax.grid(zorder=0)
 
 
 def plot_elastic_results(plot_name, results, ax, **kwargs):

@@ -85,7 +85,7 @@ def _do_plot_makespan(results, ax, **kwargs):
             ys.append(0)
             colors.append("white")
 
-    ax.bar(xs, ys, color=colors, edgecolor="black", width=1)
+    ax.bar(xs, ys, color=colors, edgecolor="black", width=1, zorder=3)
     ax.set_ylim(bottom=0)
     if tight:
         ax.set_ylabel("Slowdown [Spot / No Spot]", fontsize=6)
@@ -109,7 +109,7 @@ def _do_plot_makespan(results, ax, **kwargs):
         ax.set_xticks([])
     else:
         ax.set_xticks(xticks, labels=xticklabels)
-
+    ax.grid(zorder=0)
 
 def _do_plot_cost(results, ax, **kwargs):
     assert "num_vms" in kwargs, "num_vms not in kwargs!"
@@ -191,6 +191,7 @@ def _do_plot_cost(results, ax, **kwargs):
                 edgecolor="black",
                 alpha=float(discount / 100.0),
                 width=1,
+                zorder=3
             )
 
         # Add disccount annotation
@@ -198,18 +199,18 @@ def _do_plot_cost(results, ax, **kwargs):
             ax.text(
                 xs[-1] * 0.90,
                 ys[discount][-1] + 0.002,
-                "{}% off".format(discount),
+                r'{}\% off'.format(discount),
                 fontsize=6,
             )
         else:
             ax.text(
                 xs[-1] - 0.5,
                 ys[discount][-1] + 0.0001,
-                "{}% off".format(discount),
+                r'{}\% off'.format(discount),
             )
 
         bottom_ys = ys[discount]
-
+    ax.grid(zorder=0)
     # Also plot the cost of running in regular (no-spot VMs)
     ax.plot(
         nospot_xs,
