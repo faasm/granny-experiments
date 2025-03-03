@@ -10,11 +10,11 @@ This experiment is a single execution of the LULESH simulation using OpenMP.
 
 ## Start AKS cluster
 
-In the `experiment-base` terminal, run:
+Create a new cluster:
 
 ```bash
-(faasm-exp-base) inv cluster.provision --vm Standard_D8_v5 --nodes 1
-(faasm-exp-base) inv cluster.credentials
+inv cluster.provision --vm Standard_D8_v5 --nodes 1
+inv cluster.credentials
 ```
 
 ## Granny
@@ -22,25 +22,25 @@ In the `experiment-base` terminal, run:
 Deploy the cluster:
 
 ```bash
-(faasm-exp-faabric) faasmctl deploy.k8s --workers=1
+faasmctl deploy.k8s --workers=1
 ```
 
 Upload the WASM file:
 
 ```bash
-(faasm-exp-faabric) inv lammps.wasm.upload
+inv lammps.wasm.upload
 ```
 
 and run the experiment with:
 
 ```bash
-(faasm-exp-faabric) inv lammps.run.granny -w compute -w network
+inv lammps.run.granny -w compute -w network
 ```
 
 To remove the cluster, run:
 
 ```bash
-(faasm-exp-mpi) faasmctl delete
+faasmctl delete
 ```
 
 ## Native
@@ -78,7 +78,7 @@ which will generate a plot in [`./plots/lammps/runtime.png`](
 
 ## Clean-Up
 
-Remember to delete the cluster. From the experiment base terminal:
+Remember to delete the cluster.
 
 ```bash
 inv cluster.delete
