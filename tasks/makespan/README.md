@@ -7,11 +7,11 @@ NOTE: we only compare to ourselves!
 
 TODO: add README for the conservative plot
 
-First, from the `faasm-exp-base` shell, deploy the VM cluster:
+Create a new cluster:
 
 ```bash
-(faasm-exp-base) inv cluster.provision --vm Standard_D8_v5 --nodes 33
-(faasm-exp-base) inv cluster.credentials
+inv cluster.provision --vm Standard_D8_v5 --nodes 33
+inv cluster.credentials
 ```
 
 ## Native
@@ -19,14 +19,14 @@ First, from the `faasm-exp-base` shell, deploy the VM cluster:
 First, deploy the native `k8s` cluster:
 
 ```bash
-(faasm-exp-base) inv makespan.native.deploy --num-vms 32
+inv makespan.native.deploy --num-vms 32
 ```
 
 Now, you can run the different baselines:
 
 ```bash
-(faasm-exp-base) inv makespan.run.native-batch --workload mpi-migrate --num-vms 32 --num-tasks 100
-(faasm-exp-base) inv makespan.run.native-slurm --workload mpi-migrate --num-vms 32 --num-tasks 100
+inv makespan.run.native-batch --workload mpi-migrate --num-vms 32 --num-tasks 100
+inv makespan.run.native-slurm --workload mpi-migrate --num-vms 32 --num-tasks 100
 ```
 
 Lastly, remove the native `k8s` cluster:
@@ -46,20 +46,20 @@ faasmctl deploy.k8s --workers=32
 Second, upload the corresponding WASM files:
 
 ```bash
-(faasm-exp-faabric) inv makespan.wasm.upload
+inv makespan.wasm.upload
 ```
 
 Third, run the experiment:
 
 ```bash
-(faasm-exp-faabric) inv makespan.run.granny --num-vms 32 --num-tasks 100 --workload mpi-migrate [--migrate]
+inv makespan.run.granny --num-vms 32 --num-tasks 100 --workload mpi-migrate [--migrate]
 ```
 
 During an experiment, you may monitor the state of the cluster (in a separete
 shell) by using:
 
 ```bash
-(faasm-exp-faabric) faasmctl monitor.planner
+faasmctl monitor.planner
 ```
 
 ## Plot the results
