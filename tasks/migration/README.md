@@ -1,4 +1,4 @@
-# Migration Experiment (Fig.11)
+# Migration Experiment (Fig.11b)
 
 This experiment explores the benefits of migrating the execution of scientific
 applications to benefit from dynamic changes in the compute environment.
@@ -32,6 +32,10 @@ Lastly, plot the results:
 ```bash
 inv migration.plot
 ```
+
+which will generate a plot in [`/plots/migration/migration_speedup_all-to-all.png`](/plots/migration/migration_speedup_all-to-all.png), we also include it below:
+
+![migration plot](/plots/migration/migration_speedup_all-to-all.png)
 
 and clean up:
 

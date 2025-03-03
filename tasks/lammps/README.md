@@ -1,4 +1,4 @@
-# LAMMPS Experiment
+# LAMMPS Experiment (Fig.9a)
 
 This experiment is a single execution of the LAMMPS simulation stress tested
 as part of the array experiment.
@@ -65,10 +65,10 @@ To plot the results, you may run:
 inv lammps.plot
 ```
 
-which will generate a plot in [`./plots/lammps/runtime.png`](
-./plots/lammps/runtime.png), we also include it below:
+which will generate a plot in [`/plots/lammps/lammps_slowdown.png`](
+/plots/lammps/lammps_slowdown.png), we also include it below:
 
-![LAMMPS Runtime Plot](./plots/lammps/runtime.png)
+![LAMMPS Runtime Plot](/plots/lammps/lammps_slowdown.png)
 
 ## Clean-Up
 
