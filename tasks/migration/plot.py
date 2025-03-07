@@ -18,6 +18,10 @@ ALL_WORKLOADS = [
     "very-network",
 ]
 
+FONT_SIZE=14
+LABEL_SIZE=12
+LINE_WIDTH=2
+
 plt.rcParams.update({
     "text.usetex": True,            # Use LaTeX for all text
     "font.family": "serif",         # Use serif fonts (like LaTeX default)
@@ -96,10 +100,12 @@ def do_plot(workload, migration_results):
     )
 
     # Aesthetics
-    ax.set_ylabel("Speed-up \n [No mig. / mig.]")
-    ax.set_xlabel(r'\% of execution when to migrate')
+    ax.set_ylabel("Speed-up \n [No mig. / mig.]", fontsize=FONT_SIZE)
+    ax.set_xlabel(r'\% of execution when to migrate', fontsize=FONT_SIZE)
     ax.set_xticks(xticks)
     ax.set_xticklabels(["1 VM", "20", "40", "60", "80"])
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.xaxis.set_label_coords(0.35, -0.25)
     xlim_left = 0.5
     xlim_right = 5.5
     ax.set_xlim(left=xlim_left, right=xlim_right)
@@ -110,7 +116,7 @@ def do_plot(workload, migration_results):
             1.5,
             "{:.1f}".format(ys[0]),
             rotation="vertical",
-            fontsize=8,
+            fontsize=10,
             bbox={
                 "boxstyle": "Square, pad=0.2",
                 "edgecolor": "black",
@@ -121,7 +127,7 @@ def do_plot(workload, migration_results):
     else:
         ax.set_ylim(bottom=0)
     ax.grid(zorder=0)
-    hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red", zorder=4)
+    hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red", zorder=4, linewidth=LINE_WIDTH)
 
     save_plot(
         fig, MIGRATION_PLOTS_DIR, "migration_speedup_{}".format(workload)

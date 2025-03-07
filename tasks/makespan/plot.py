@@ -1,7 +1,22 @@
+import matplotlib.pyplot as plt
+
+FONT_SIZE=12
+LABEL_SIZE=10
+
+plt.rcParams.update({
+    "text.usetex": True,            # Use LaTeX for all text
+    "font.family": "serif",         # Use serif fonts (like LaTeX default)
+    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
+    "axes.labelsize": FONT_SIZE,           # Font size for axes labels
+    "font.size": FONT_SIZE,                # General font size
+    "legend.fontsize": FONT_SIZE,          # Font size for legend
+    "xtick.labelsize": LABEL_SIZE,          # Font size for x tick labels
+    "ytick.labelsize": LABEL_SIZE           # Font size for y tick labels
+})
+
 from invoke import task
 from matplotlib.patches import Patch
 from matplotlib.pyplot import subplots, subplot_mosaic
-import matplotlib.pyplot as plt
 from tasks.util.elastic import (
     plot_elastic_results,
     read_elastic_results,
@@ -29,17 +44,6 @@ from tasks.util.spot import (
     plot_spot_results,
     read_spot_results,
 )
-
-plt.rcParams.update({
-    "text.usetex": True,            # Use LaTeX for all text
-    "font.family": "serif",         # Use serif fonts (like LaTeX default)
-    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
-    "axes.labelsize": 12,           # Font size for axes labels
-    "font.size": 12,                # General font size
-    "legend.fontsize": 12,          # Font size for legend
-    "xtick.labelsize": 10,          # Font size for x tick labels
-    "ytick.labelsize": 10           # Font size for y tick labels
-})
 
 
 # TODO: delete me if miracle happens

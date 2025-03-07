@@ -21,6 +21,10 @@ from tasks.util.trace import load_task_trace_from_file
 # Plotting utilities
 # ----------------------------
 
+FONT_SIZE=14
+LABEL_SIZE=12
+LINE_WIDTH=2
+
 
 def read_locality_results(num_vms, num_tasks, num_cpus_per_vm, migrate=False):
     workload = "mpi-locality" if not migrate else "mpi-migrate"
@@ -440,8 +444,9 @@ def _do_plot_exec_cdf(results, ax, **kwargs):
         # y2 = splev(x2, spl)
         # ax.plot(x2, y2, color=PLOT_COLORS[label], label=this_label, linewidth=0.5)
 
-        ax.set_xlabel("Job Completion Time [s]")
-        ax.set_ylabel("CDF")
+        ax.set_xlabel("Job Completion Time [s]", fontsize=FONT_SIZE)
+        ax.set_ylabel("CDF", fontsize=FONT_SIZE)
+        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
         ax.set_ylim(bottom=0, top=1)
         ax.legend()
         ax.grid(zorder=0)
@@ -477,8 +482,9 @@ def _do_plot_makespan(results, ax, **kwargs):
 
     ax.bar(xs, ys, color=colors, edgecolor="black", width=1, zorder=3)
     ax.set_ylim(bottom=0)
-    ax.set_ylabel("Makespan [s]")
+    ax.set_ylabel("Makespan [s]", fontsize=FONT_SIZE)
     ax.set_xticks(xticks, labels=xticklabels)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -507,12 +513,14 @@ def _do_plot_ts_vcpus(results, ax, **kwargs):
             [results[num_vms][baseline]["ts_vcpus"][x] for x in xs],
             label=get_label_for_baseline(workload, baseline),
             color=get_color_for_baseline(workload, baseline),
+            linewidth=LINE_WIDTH,
         )
 
     ax.set_xlim(left=0, right=xlim)
     ax.set_ylim(bottom=0, top=100)
-    ax.set_ylabel(r'\% idle vCPUs')
-    ax.set_xlabel("Time [s]")
+    ax.set_ylabel(r'\% idle vCPUs', fontsize=FONT_SIZE)
+    ax.set_xlabel("Time [s]", fontsize=FONT_SIZE)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -542,6 +550,7 @@ def _do_plot_ts_xvm_links(results, ax, **kwargs):
             [results[num_vms][baseline]["ts_xvm_links"][x] for x in xs],
             label=get_label_for_baseline(workload, baseline),
             color=get_color_for_baseline(workload, baseline),
+            linewidth=LINE_WIDTH,
         )
 
     # We do Granny separately to interpolate
@@ -560,13 +569,15 @@ def _do_plot_ts_xvm_links(results, ax, **kwargs):
         spl_granny_migrate(new_xs_granny_migrate),
         label=get_label_for_baseline(workload, "granny-migrate"),
         color=get_color_for_baseline(workload, "granny-migrate"),
+        linewidth=LINE_WIDTH,
     )
 
     xlim = max(xlim, max(new_xs_granny_migrate))
     ax.set_xlim(left=0, right=xlim)
     ax.set_ylim(bottom=0)
-    ax.set_xlabel("Time [s]")
-    ax.set_ylabel(r'\# cross-VM links')
+    ax.set_xlabel("Time [s]", fontsize=FONT_SIZE)
+    ax.set_ylabel(r'\# cross-VM links', fontsize=FONT_SIZE)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -719,11 +730,13 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
             histtype="step",
             density=True,
             cumulative=True,
+            linewidth=LINE_WIDTH,
         )
         fix_hist_step_vertical_line_at_end(ax)
 
-        ax.set_xlabel("Job Completion Time [s]")
-        ax.set_ylabel("CDF")
+        ax.set_xlabel("Job Completion Time [s]", fontsize=FONT_SIZE)
+        ax.set_ylabel("CDF", fontsize=FONT_SIZE)
+        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
         ax.set_ylim(bottom=0, top=1)
         ax.grid(zorder=0)
 

@@ -11,6 +11,9 @@ from tasks.util.plot import get_color_for_baseline, get_label_for_baseline
 MAKESPAN_RESULTS_DIR = join(RESULTS_DIR, "makespan")
 MAKESPAN_PLOTS_DIR = join(PLOTS_ROOT, "makespan")
 
+FONT_SIZE=14
+LABEL_SIZE=12
+LINE_WIDTH=2
 
 def read_spot_results(num_vms, num_tasks, num_cpus_per_vm):
     result_dict = {}
@@ -91,7 +94,7 @@ def _do_plot_makespan(results, ax, **kwargs):
         ax.set_ylabel("Slowdown [Spot / No Spot]", fontsize=6)
         ax.tick_params(axis="y", labelsize=6)
     else:
-        ax.set_ylabel("Makespan Slowdown \n [Spot VMs / No Spot VMs]")
+        ax.set_ylabel("Makespan Slowdown \n [Spot VMs / No Spot VMs]", fontsize=FONT_SIZE)
 
     if tight:
         legend_entries = [
@@ -109,6 +112,7 @@ def _do_plot_makespan(results, ax, **kwargs):
         ax.set_xticks([])
     else:
         ax.set_xticks(xticks, labels=xticklabels)
+        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 def _do_plot_cost(results, ax, **kwargs):
@@ -219,6 +223,7 @@ def _do_plot_cost(results, ax, **kwargs):
         linestyle="-",
         marker=".",
         label="Cost without Spot VMs" if not tight else "Cost No Spot",
+        linewidth=LINE_WIDTH
     )
 
     ax.set_ylim(bottom=0)
@@ -229,8 +234,9 @@ def _do_plot_cost(results, ax, **kwargs):
         ax.set_xticks([])
     else:
         ax.set_ylabel("Cost [VM Hours]")
-        ax.legend(fontsize=8)
+        ax.legend(fontsize=FONT_SIZE)
         ax.set_xticks(xticks, labels=xticklabels)
+        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
 
 
 def plot_spot_results(plot_name, results, ax, **kwargs):

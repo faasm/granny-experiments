@@ -44,6 +44,9 @@ OPENMP_ELASTIC_NATIVE_BINARY = join(
 # Parameters for the macrobenchmark
 OPENMP_ELASTIC_NUM_LOOPS = 5
 
+FONT_SIZE=14
+LABEL_SIZE=12
+LINE_WIDTH=2
 
 def get_elastic_input_data(num_loops=OPENMP_ELASTIC_NUM_LOOPS, native=False):
     if native:
@@ -226,7 +229,8 @@ def _do_plot_makespan(results, ax, **kwargs):
 
     ax.bar(xs, ys, color=colors, edgecolor="black", width=1, zorder=3)
     ax.set_ylim(bottom=0)
-    ax.set_ylabel("Makespan [s]")
+    ax.set_ylabel("Makespan [s]", fontsize=FONT_SIZE)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
 
     ax.set_xticks(xticks, labels=xticklabels)
     ax.grid(zorder=0)
@@ -255,6 +259,7 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
             histtype="step",
             density=True,
             cumulative=True,
+            linewidth=LINE_WIDTH,
         )
         fix_hist_step_vertical_line_at_end(ax)
 
@@ -264,9 +269,10 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
         # y2 = splev(x2, spl)
         # ax.plot(x2, y2, color=PLOT_COLORS[label], label=this_label, linewidth=0.5)
 
-        ax.set_xlabel("Job Completion Time [s]")
-        ax.set_ylabel("CDF")
+        ax.set_xlabel("Job Completion Time [s]", fontsize=FONT_SIZE)
+        ax.set_ylabel("CDF", fontsize=FONT_SIZE)
         ax.set_ylim(bottom=0, top=1)
+        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
         ax.grid(zorder=0)
 
 
@@ -325,12 +331,14 @@ def _do_plot_percentage_vcpus(results, ax, **kwargs):
             label=get_label_for_baseline("omp-elastic", baseline),
             linestyle="-",
             marker=".",
+            linewidth=LINE_WIDTH,
         )
 
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=-0.25)
-    ax.set_ylabel(r'Idle CPU-seconds \\ Total CPU-seconds [\%]')
+    ax.set_ylabel(r'Idle CPU-seconds \\ \ Total CPU-seconds [\%]', fontsize=FONT_SIZE)
     ax.set_xticks(xs, labels=xticklabels)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -355,12 +363,14 @@ def _do_plot_ts_vcpus(results, ax, **kwargs):
             [results[num_vms][baseline]["ts_vcpus"][x] for x in xs],
             label=get_label_for_baseline("omp-elastic", baseline),
             color=get_color_for_baseline("omp-elastic", baseline),
+            linewidth=LINE_WIDTH,
         )
 
     ax.set_xlim(left=0, right=xlim)
     ax.set_ylim(bottom=0, top=100)
-    ax.set_ylabel(r'\% idle vCPUs')
-    ax.set_xlabel("Time [s]")
+    ax.set_ylabel(r'\% idle vCPUs', fontsize=FONT_SIZE)
+    ax.set_xlabel("Time [s]", fontsize=FONT_SIZE)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 

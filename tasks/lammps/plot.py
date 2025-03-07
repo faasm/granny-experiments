@@ -13,6 +13,10 @@ from tasks.util.lammps import (
 )
 from tasks.util.plot import UBENCH_PLOT_COLORS, SINGLE_COL_FIGSIZE, save_plot
 
+FONT_SIZE=14
+LABEL_SIZE=12
+LINE_WIDTH=2
+
 plt.rcParams.update({
     "text.usetex": True,            # Use LaTeX for all text
     "font.family": "serif",         # Use serif fonts (like LaTeX default)
@@ -93,13 +97,14 @@ def plot(ctx, plot_elapsed_times=True):
     ymin = 0
     ymax = 1.5
     xmax = max(num_procs) + 1
-    ax.hlines(y=1, color="red", xmin=xmin, xmax=xmax, zorder=4)
+    ax.hlines(y=1, color="red", xmin=xmin, xmax=xmax, zorder=4, linestyle="dashed", linewidth=LINE_WIDTH)
     ax.set_xlim(left=xmin)
     ax.set_xticks(list(range(17)))
     ax.set_ylim(bottom=ymin, top=ymax)
     ax.legend(ncols=2, loc="upper center")
-    ax.set_xlabel(r'\# MPI Processes')
-    ax.set_ylabel("Slowdown\n[{} / OpenMPI]".format(SYSTEM_NAME))
+    ax.set_xlabel(r'\# MPI Processes', fontsize=FONT_SIZE)
+    ax.set_ylabel("Slowdown\n[{} / OpenMPI]".format(SYSTEM_NAME), fontsize=FONT_SIZE)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
     save_plot(fig, LAMMPS_PLOTS_DIR, "lammps_slowdown")

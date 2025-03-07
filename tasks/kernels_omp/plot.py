@@ -13,6 +13,10 @@ from tasks.util.kernels import (
 )
 from tasks.util.plot import UBENCH_PLOT_COLORS, SINGLE_COL_FIGSIZE, save_plot
 
+FONT_SIZE=14
+LABEL_SIZE=12
+LINE_WIDTH=2
+
 plt.rcParams.update({
     "text.usetex": True,            # Use LaTeX for all text
     "font.family": "serif",         # Use serif fonts (like LaTeX default)
@@ -108,15 +112,16 @@ def plot(ctx):
     # Horizontal line at slowdown of 1
     xlim_left = -(0.5 + width)
     xlim_right = len(nprocs) - 0.5
-    ax.hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red", zorder=4)
+    ax.hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red", zorder=4, linewidth=LINE_WIDTH)
 
     ax.set_xlim(left=xlim_left, right=xlim_right)
     ax.set_ylim(bottom=0, top=ymax)
-    ax.set_xlabel("Number of OpenMP threads")
-    ax.set_ylabel("Slowdown \n [{} / OpenMP]".format(SYSTEM_NAME))
+    ax.set_xlabel("Number of OpenMP threads", fontsize=FONT_SIZE)
+    ax.set_ylabel("Slowdown \n [{} / OpenMP]".format(SYSTEM_NAME), fontsize=FONT_SIZE)
     ax.legend(
-        loc="upper right", ncol=5, bbox_to_anchor=(1.00, 1.17), fontsize=9
+        loc="upper right", ncol=5, bbox_to_anchor=(1.02, 1.20), fontsize=10
     )
     ax.grid(zorder=0)
+    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
 
     save_plot(fig, OPENMP_KERNELS_PLOTS_DIR, "openmp_kernels_slowdown")
