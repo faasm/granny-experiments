@@ -60,7 +60,7 @@ def wasm(ctx, w, repeats=1):
             )
         workload_config = LAMMPS_SIM_WORKLOAD_CONFIGS[workload]
         data_file = basename(
-            get_lammps_data_file(workload_config["data-file"])["data"][0]
+            get_lammps_data_file(workload_config["data_file"])["data"][0]
         )
 
         csv_name = "lammps_granny_{}.csv".format(workload)
@@ -111,7 +111,7 @@ def native(ctx, w, repeats=1):
                 )
             )
         workload_config = LAMMPS_SIM_WORKLOAD_CONFIGS[workload]
-        data_file = get_lammps_data_file(workload_config["data-file"])["data"][
+        data_file = get_lammps_data_file(workload_config["data_file"])["data"][
             0
         ]
 
