@@ -44,9 +44,10 @@ OPENMP_ELASTIC_NATIVE_BINARY = join(
 # Parameters for the macrobenchmark
 OPENMP_ELASTIC_NUM_LOOPS = 5
 
-FONT_SIZE=14
-LABEL_SIZE=12
-LINE_WIDTH=2
+FONT_SIZE = 14
+LABEL_SIZE = 12
+LINE_WIDTH = 2
+
 
 def get_elastic_input_data(num_loops=OPENMP_ELASTIC_NUM_LOOPS, native=False):
     if native:

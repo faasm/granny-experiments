@@ -11,9 +11,10 @@ from tasks.util.plot import get_color_for_baseline, get_label_for_baseline
 MAKESPAN_RESULTS_DIR = join(RESULTS_DIR, "makespan")
 MAKESPAN_PLOTS_DIR = join(PLOTS_ROOT, "makespan")
 
-FONT_SIZE=14
-LABEL_SIZE=12
-LINE_WIDTH=2
+FONT_SIZE = 14
+LABEL_SIZE = 12
+LINE_WIDTH = 2
+
 
 def read_spot_results(num_vms, num_tasks, num_cpus_per_vm):
     result_dict = {}
@@ -114,6 +115,7 @@ def _do_plot_makespan(results, ax, **kwargs):
         ax.set_xticks(xticks, labels=xticklabels)
         ax.tick_params(axis='both', labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
+
 
 def _do_plot_cost(results, ax, **kwargs):
     assert "num_vms" in kwargs, "num_vms not in kwargs!"

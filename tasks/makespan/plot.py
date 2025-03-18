@@ -1,19 +1,4 @@
 import matplotlib.pyplot as plt
-
-FONT_SIZE=12
-LABEL_SIZE=10
-
-plt.rcParams.update({
-    "text.usetex": True,            # Use LaTeX for all text
-    "font.family": "serif",         # Use serif fonts (like LaTeX default)
-    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
-    "axes.labelsize": FONT_SIZE,           # Font size for axes labels
-    "font.size": FONT_SIZE,                # General font size
-    "legend.fontsize": FONT_SIZE,          # Font size for legend
-    "xtick.labelsize": LABEL_SIZE,          # Font size for x tick labels
-    "ytick.labelsize": LABEL_SIZE           # Font size for y tick labels
-})
-
 from invoke import task
 from matplotlib.patches import Patch
 from matplotlib.pyplot import subplots, subplot_mosaic
@@ -45,102 +30,16 @@ from tasks.util.spot import (
     read_spot_results,
 )
 
-
-# TODO: delete me if miracle happens
-@task
-def migration(ctx):
-    """
-    Macrobenchmark plot showing the benefits of migrating MPI applications to
-    improve locality of execution. We show:
-    - LHS: both number of cross-VM links and number of idle cpu cores per exec
-    - RHS: timeseries of one of the points in the plot
-    """
-    num_vms = [8, 16, 24, 32]
-    num_tasks = [50, 100, 150, 200]
-    num_cpus_per_vm = 8
-
-    # RHS: zoom in one of the bars
-    timeseries_num_vms = num_vms[-1]
-
-    results = {}
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
-        results[n_vms] = read_locality_results(
-            n_vms, n_tasks, num_cpus_per_vm, migrate=True
-        )
-
-    # ----------
-    # Plot 1: aggregate idle vCPUs
-    # ----------
-
-    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
-
-    plot_locality_results(
-        "percentage_vcpus",
-        results,
-        ax,
-        num_vms=num_vms,
-        num_tasks=num_tasks,
-        migrate=True,
-    )
-
-    # Manually craft the legend
-    baselines = ["slurm", "batch", "granny", "granny-migrate"]
-    legend_entries = [
-        Patch(
-            color=get_color_for_baseline("mpi-migrate", baseline),
-            label=get_label_for_baseline("mpi-migrate", baseline),
-        )
-        for baseline in baselines
-    ]
-    fig.legend(
-        handles=legend_entries,
-        loc="upper center",
-        ncols=2,
-        bbox_to_anchor=(0.535, 0.3),
-    )
-
-    save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_migrate_vcpus")
-
-    # ----------
-    # Plot 1: aggregate xVM links
-    # ----------
-
-    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
-
-    plot_locality_results(
-        "percentage_xvm",
-        results,
-        ax,
-        num_vms=num_vms,
-        num_tasks=num_tasks,
-        migrate=True,
-    )
-
-    save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_migrate_xvm")
-
-    # ----------
-    # Plot 3: timeseries of vCPUs
-    # ----------
-
-    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
-
-    plot_locality_results(
-        "ts_vcpus", results, ax, num_vms=timeseries_num_vms, migrate=True
-    )
-
-    save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_migrate_ts_vcpus")
-
-    # ----------
-    # Plot 4: timeseries of xVM links
-    # ----------
-
-    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
-
-    plot_locality_results(
-        "ts_xvm_links", results, ax, num_vms=timeseries_num_vms, migrate=True
-    )
-
-    save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_migrate_ts_xvm")
+plt.rcParams.update({
+    "text.usetex": True,            # Use LaTeX for all text
+    "font.family": "serif",         # Use serif fonts (like LaTeX default)
+    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
+    "axes.labelsize": 12,           # Font size for axes labels
+    "font.size": 12,                # General font size
+    "legend.fontsize": 12,          # Font size for legend
+    "xtick.labelsize": 10,          # Font size for x tick labels
+    "ytick.labelsize": 10           # Font size for y tick labels
+})
 
 
 @task
@@ -151,12 +50,6 @@ def locality(ctx):
     - LHS: both number of cross-VM links and number of idle cpu cores per exec
     - RHS: timeseries of one of the points in the plot
     """
-    # num_vms = [8, 16, 24, 32]
-    # num_tasks = [50, 100, 150, 200]
-    # num_vms = [4, 8]
-    # num_tasks = [10, 50]
-    # num_vms = [8]
-    # num_tasks = [50]
     num_vms = [8, 16, 24, 32]
     num_tasks = [25, 50, 75, 100]
     num_cpus_per_vm = 8
