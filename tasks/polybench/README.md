@@ -12,8 +12,8 @@ First, provision the cluster. For ease of deployment, we still deploy a K8s
 cluster of just one node, which we will access directly.
 
 ```bash
-inv cluster.provision --vm Standard_D8_v5 --nodes 1 --name ${CLUSTER_NAME}
-inv cluster.credentials --name ${CLUSTER_NAME}
+inv cluster.provision --vm Standard_D8_v5 --nodes 1
+inv cluster.credentials
 ```
 
 ## Native
@@ -81,5 +81,5 @@ which will generate a `.pdf` file in `./plots/polybench/slowdown.pdf`.
 Lastly, clean the cluster:
 
 ```bash
-inv cluster.delete --name ${CLUSTER_NAME}
+inv cluster.delete
 ```
