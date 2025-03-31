@@ -2,7 +2,6 @@ from invoke import task
 from os.path import join
 from subprocess import run
 from tasks.util.env import (
-    ACR_NAME,
     AKS_CLUSTER_NAME,
     AKS_NODE_COUNT,
     AKS_REGION,
@@ -74,8 +73,6 @@ def provision(
             "--kubernetes-version {}".format(k8s_ver),
             "--ssh-key-value {}".format(AZURE_PUB_SSH_KEY),
             "--location {}".format(location),
-            # Could not create a role assignment for ACR. Are you an Owner on this subscription?
-            # "--attach-acr {}".format(ACR_NAME.split(".")[0]),
             "{}".format(
                 "--kubelet-config {}".format(granny_kubelet_config)
                 if granny

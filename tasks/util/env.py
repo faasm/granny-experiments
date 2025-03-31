@@ -15,7 +15,7 @@ K9S_VERSION = "0.32.2"
 
 AZURE_RESOURCE_GROUP = "faasm"
 ACR_NAME = "faasm.azurecr.io"
-AKS_CLUSTER_NAME = getenv('USER') + "-faasm-cluster"
+AKS_CLUSTER_NAME = getenv("USER") + "-faasm-cluster"
 AKS_VM_SIZE = "Standard_DS5_v2"
 AKS_NODE_COUNT = 4
 AKS_REGION = "eastus"
