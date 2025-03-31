@@ -1,7 +1,7 @@
-# Granny Experiments
+# GRANNY Experiments
 
-This repo contains the experiments for the [Granny paper](
-https://arxiv.org/abs/2302.11358).
+This repo contains the experiments for the [GRANNY paper](
+https://www.usenix.org/conference/nsdi25/presentation/segarra).
 
 All instructions in this repo assume that you have checked-out the repository,
 and activated the python virtual environment (requires `python3-venv`):
