@@ -1,19 +1,10 @@
 # GRANNY Experiments
 
-This repo contains the experiments for the [GRANNY paper](
-https://www.usenix.org/conference/nsdi25/presentation/segarra).
+This repo contains the experiments for the [Granny paper](https://arxiv.org/abs/2302.11358).
 
-All instructions in this repo assume that you have checked-out the repository,
-and activated the python virtual environment (requires `python3-venv`):
+When following any instructions in this repository, it is recommended to have a dedicated terminal with virtual environment of this repo activated: (`source ./bin/workon.sh`).
 
-```bash
-source ./bin/workon.sh
-inv -l # shows the differnt tasks
-```
-
-The Granny source-code is merged into the Faasm [repository](
-https://github.com/faasm/faasm) tag [`0.27.0`](
-https://github.com/faasm/faasm/releases/tag/v0.27.0)
+This virtual environment provides commands for provision/deprovision K8s clusters on Azure (with AKS), accessing low-level monitoring tools (we recommend `k9s`), and also commands for deploy Faabric clusters, run the experiments, and plot the results.
 
 ## Experiments in this repository
 
