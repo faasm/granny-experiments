@@ -21,9 +21,9 @@ from tasks.util.trace import load_task_trace_from_file
 # Plotting utilities
 # ----------------------------
 
-FONT_SIZE=14
-LABEL_SIZE=12
-LINE_WIDTH=2
+FONT_SIZE = 14
+LABEL_SIZE = 12
+LINE_WIDTH = 2
 
 
 def read_locality_results(num_vms, num_tasks, num_cpus_per_vm, migrate=False):
@@ -237,17 +237,17 @@ def read_locality_results(num_vms, num_tasks, num_cpus_per_vm, migrate=False):
             ).to_list()
 
             # Idle vCPUs
-            for (idle_cpu, ts) in zip(idle_cpus, tss):
+            for idle_cpu, ts in zip(idle_cpus, tss):
                 result_dict[baseline]["ts_vcpus"][ts] = idle_cpu
 
             # x-VM links
             xvm_links = sch_info_csv["NumCrossVmLinks"].to_list()
-            for (ts, xvm_link) in zip(tss, xvm_links):
+            for ts, xvm_link in zip(tss, xvm_links):
                 result_dict[baseline]["ts_xvm_links"][ts] = xvm_link
 
             # Num of idle VMs
             num_idle_vms = sch_info_csv["NumIdleVms"].to_list()
-            for (ts, n_idle_vms) in zip(tss, num_idle_vms):
+            for ts, n_idle_vms in zip(tss, num_idle_vms):
                 result_dict[baseline]["ts_idle_vms"][ts] = n_idle_vms
 
         # -----
@@ -446,7 +446,7 @@ def _do_plot_exec_cdf(results, ax, **kwargs):
 
         ax.set_xlabel("Job Completion Time [s]", fontsize=FONT_SIZE)
         ax.set_ylabel("CDF", fontsize=FONT_SIZE)
-        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+        ax.tick_params(axis="both", labelsize=LABEL_SIZE)
         ax.set_ylim(bottom=0, top=1)
         ax.legend()
         ax.grid(zorder=0)
@@ -484,7 +484,7 @@ def _do_plot_makespan(results, ax, **kwargs):
     ax.set_ylim(bottom=0)
     ax.set_ylabel("Makespan [s]", fontsize=FONT_SIZE)
     ax.set_xticks(xticks, labels=xticklabels)
-    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.tick_params(axis="both", labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -496,9 +496,9 @@ def _do_plot_ts_vcpus(results, ax, **kwargs):
     workload = "mpi-migrate" if "migrate" in kwargs else "mpi-locality"
 
     if workload == "mpi-migrate":
-        baselines = ["batch", "slurm", "granny", "granny-migrate"]
-    else:
-        baselines = ["granny", "granny-batch", "granny-migrate"]
+        raise RuntimeError("Unsupported plot")
+
+    baselines = ["granny", "granny-batch", "granny-migrate"]
 
     xlim = 0
     for baseline in baselines:
@@ -516,11 +516,11 @@ def _do_plot_ts_vcpus(results, ax, **kwargs):
             linewidth=LINE_WIDTH,
         )
 
-    ax.set_xlim(left=0, right=xlim)
+    ax.set_xlim(left=0, right=3500)
     ax.set_ylim(bottom=0, top=100)
-    ax.set_ylabel(r'\% idle vCPUs', fontsize=FONT_SIZE)
+    ax.set_ylabel(r"\% idle vCPUs", fontsize=FONT_SIZE)
     ax.set_xlabel("Time [s]", fontsize=FONT_SIZE)
-    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.tick_params(axis="both", labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -573,11 +573,11 @@ def _do_plot_ts_xvm_links(results, ax, **kwargs):
     )
 
     xlim = max(xlim, max(new_xs_granny_migrate))
-    ax.set_xlim(left=0, right=xlim)
+    ax.set_xlim(left=0, right=3500)
     ax.set_ylim(bottom=0)
     ax.set_xlabel("Time [s]", fontsize=FONT_SIZE)
-    ax.set_ylabel(r'\# cross-VM links', fontsize=FONT_SIZE)
-    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.set_ylabel(r"\# cross-VM links", fontsize=FONT_SIZE)
+    ax.tick_params(axis="both", labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -628,7 +628,7 @@ def _do_plot_percentage_vcpus(results, ax, **kwargs):
     xs = [ind for ind in range(len(num_vms))]
     xticklabels = []
 
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
+    for n_vms, n_tasks in zip(num_vms, num_tasks):
         xticklabels.append("{} VMs\n({} Jobs)".format(n_vms, n_tasks))
     for baseline in baselines:
         ys = [cumsum_ys[baseline][n_vms][1] for n_vms in num_vms]
@@ -643,7 +643,7 @@ def _do_plot_percentage_vcpus(results, ax, **kwargs):
 
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=-0.25)
-    ax.set_ylabel(r'Idle CPU-seconds \\ Total CPU-seconds [\%]', fontsize=8)
+    ax.set_ylabel(r"Idle CPU-seconds \\ Total CPU-seconds [\%]", fontsize=8)
     ax.set_xticks(xs, labels=xticklabels)
     ax.grid(zorder=0)
 
@@ -687,7 +687,7 @@ def _do_plot_percentage_xvm(results, ax, **kwargs):
     # WARNING: this plot reads num_vms as an array
     xs = [ind for ind in range(len(num_vms))]
     xticklabels = []
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
+    for n_vms, n_tasks in zip(num_vms, num_tasks):
         xticklabels.append("{} VMs\n({} Jobs)".format(n_vms, n_tasks))
     for baseline in baselines:
         ys = [
@@ -716,7 +716,7 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
     cdf_num_vms = kwargs["cdf_num_vms"]
     cdf_num_tasks = kwargs["cdf_num_tasks"]
 
-    baselines = ["granny-batch", "granny", "granny-migrate"]
+    baselines = ["granny", "granny-batch", "granny-migrate"]
 
     xs = list(range(cdf_num_tasks))
     for baseline in baselines:
@@ -736,8 +736,9 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
 
         ax.set_xlabel("Job Completion Time [s]", fontsize=FONT_SIZE)
         ax.set_ylabel("CDF", fontsize=FONT_SIZE)
-        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+        ax.tick_params(axis="both", labelsize=LABEL_SIZE)
         ax.set_ylim(bottom=0, top=1)
+        ax.set_xlim(left=0, right=3400)
         ax.grid(zorder=0)
 
 

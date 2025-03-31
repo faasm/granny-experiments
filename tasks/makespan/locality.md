@@ -1,7 +1,10 @@
-# Makespan Experiment (Locality Version)
+# Improving locality with compaction policy
 
 In this experiment we study the benefits of using Granules to improve locality
-of execution while maintaining high cluster utilisation.
+of execution while maintaining high cluster utilisation. We implement a
+management policy that deliberately leaves a target number of vCPUs idle,
+allocates vCPUs to apps eagerly, and uses the buffer vCPUs to reduce
+fragmentation whenever the opportunity arises.
 
 For each experiment run, we increase the cluster size (in terms of number of
 VMs) and the number of jobs in the tasks, proportionally.
@@ -10,7 +13,7 @@ Re-run the following instructions with the following values:
 
 ```bash
 NUM_VMS=8,16,24,32
-NUM_TASKS=50,100,150,200
+NUM_TASKS=25,50,75,100
 ```
 
 ## Deploy the cluster
@@ -21,14 +24,14 @@ First, to deploy the cluster, run:
 export NUM_VMS=
 export NUM_TASKS=
 
-inv cluster.provision --vm Standard_D8_v5 --nodes ${NUM_VMS} + 1
+inv cluster.provision --vm Standard_D8_v5 --nodes $((${NUM_VMS} + 1))
 inv cluster.credentials
 ```
 
 ## Native (Native Batch Schedulers with Granny's MPI implementation)
 
 For this experiment, our native baselines also run with Granny's MPI
-implementation. This is to make the comparison of improvement of performance
+backend. This is to make the comparison of improvement of performance
 through better locality fair:
 
 ```bash

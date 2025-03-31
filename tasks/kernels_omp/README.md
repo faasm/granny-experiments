@@ -8,7 +8,7 @@ as a microbenchmark for Granny's OpenMP implementation.
 In the `experiment-base` terminal, run:
 
 ```bash
-(faasm-exp-base) inv cluster.provision --vm Standard_D8_v5 --nodes 2 cluster.credentials
+inv cluster.provision --vm Standard_D8_v5 --nodes 2 cluster.credentials
 ```
 
 ## Faasm
@@ -16,19 +16,19 @@ In the `experiment-base` terminal, run:
 Deploy the cluster:
 
 ```bash
-(faasm-exp-faabric) faasmctl deploy.k8s --workers=1
+faasmctl deploy.k8s --workers=1
 ```
 
 Upload the WASM file:
 
 ```bash
-(faasm-exp-faabric) inv kernels-omp.wasm.upload
+inv kernels-omp.wasm.upload
 ```
 
 and run the experiment with:
 
 ```bash
-(faasm-exp-faabric) inv kernels-omp.run.wasm
+inv kernels-omp.run.wasm
 ```
 
 finally, delete the cluster:
@@ -64,14 +64,12 @@ inv kernels-omp.plot
 ```
 
 the plot will be available in [`./plots/kernels-omp/openmp_kernels_slowdown.pdf`](
-./plots/kernels-omp/openmp_kernels_slowdown.pdf), we also include it below:
-
-![OpenMP Kernels Slowdown Plot](./plots/kernels-omp/openmp_kernels_slowdown.png)
+./plots/kernels-omp/openmp_kernels_slowdown.pdf).
 
 ## Clean-up
 
 Finally, delete the AKS cluster:
 
 ```bash
-(faasm-exp-base) inv cluster.delete
+inv cluster.delete
 ```

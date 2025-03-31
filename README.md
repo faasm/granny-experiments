@@ -3,34 +3,30 @@
 This repo contains the experiments for the [Granny paper](
 https://arxiv.org/abs/2302.11358).
 
-When following any instructions in this repository, it is recommended to
-have two open terminals:
-* One on the [`experiment-base`](https://github.com/faasm/experiment-base) repo
-  with the virtual environment activated (`source ./bin/workon.sh`). From now
-  onward, we will refer to this shell by its venv name: `faasm-exp-base`.
-* One with this repo and the virtual environment activated
-  (`source ./bin/workon.sh`). From now onward, we will refer to this shell by
-  its venv name: `faasm-exp-faabric`.
+All instructions in this repo assume that you have checked-out the repository,
+and activated the python virtual environment (requires `python3-venv`):
 
-The former is used to provision/deprovision K8s clusters on Azure (with AKS),
-and also to access low-level monitoring tools (we recommend `k9s`).
+```bash
+source ./bin/workon.sh
+inv -l # shows the differnt tasks
+```
 
-The latter is used to deploy Faabric clusters, run the experiments, and plot
-the results.
+The Granny source-code is merged into the Faasm [repository](
+https://github.com/faasm/faasm) tag [`0.27.0`](
+https://github.com/faasm/faasm/releases/tag/v0.27.0)
 
 ## Experiments in this repository
 
-Microbenchmarks:
-* [Polybench](./tasks/polybench/README.md) - experiment to measure the baseline overhead of using WebAssembly to execute the [PolyBench/C](https://web.cse.ohio-state.edu/~pouchet.2/software/polybench/) kernels.
-* [Kernels (MPI)](./tasks/kernels_mpi/README.md) - microbenchmark of Faabric's MPI implementation using a subset of the [ParRes Kernels](https://github.com/ParRes/Kernels)
-* [Kernels (OpenMP)](./tasks/kernels_omp/README.md) - microbenchmark of Faabric's OpenMP implementation using a subset of the [ParRes Kernels](https://github.com/ParRes/Kernels).
-* [LULESH](./tasks/lulesh/README.md) - experiment using Granny to run a one-off  explicit shock dynamic simulation with LLNL's [LULESH](https://github.com/LLNL/LULESH).
-* [LAMMPS](./tasks/lammps/README.md) - experiment using Faabric to run a one-off molecule simulation using [LAMMPS](https://www.lammps.org)
-* [Migration](./tasks/migration/README.md) - microbenchmark showcasing the benefits of migrating an MPI application to improve locality.
-* [Elastic] - TODO
+The following table summarizes the different experiments available, with the
+figures in the paper. The experiment results are also versioned in the repo,
+so we add a quick command to re-generate the plot.
 
-Macrobenchmarks:
-* [Makespan](./tasks/makespan/README.md) - experiment using Faabric to run a trace of scientific applications over a shared cluster of VMs. Comes in three flavours:
-* [MPI Migration for Locality] - TODO
-* [OpenMP Elastic Scaling to improve utilisation] - TODO
-* [MPI + OpenMP Migration to reduce VM working set] - TODO
+| Figure | Description (Instructions) | Quick Plot |
+|---|---|---|
+| Fig 6 | [Improving locality with compaction policy](./tasks/makespan/locality.md) | inv makespan.plot.locality |
+| Fig 7 | [Improving utilization with elastic policy](./tasks/makespan/elastic.md) | inv makespan.plot.elastic |
+| Fig 8 | [Ephemeral VMs with spot policy](./tasks/makespan/spot.md) | inv makespan.plot.spot |
+| Fig 9 | MPI backend performance [MPI Kernels](./tasks/kernels_mpi/README.md.md) and [LAMMPS](./tasks/lammps/README.md) | inv makespan.plot.spot |
+| Fig 10 | [OpenMP backend performance](./tasks/kernels_omp/README.md) | inv makespan.plot.spot |
+| Fig 11 | [Speedup when migrating Granules](./tasks/migration/README.md) | inv migration.plot |
+| Fig 12 | [Speedup when elastically scaling to more vCPUs](./tasks/elastic/README.md) | inv elastic.plot |

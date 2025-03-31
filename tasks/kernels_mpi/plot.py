@@ -14,20 +14,25 @@ from tasks.util.kernels import (
 )
 from tasks.util.plot import UBENCH_PLOT_COLORS, SINGLE_COL_FIGSIZE, save_plot
 
-FONT_SIZE=14
-LABEL_SIZE=12
-LINE_WIDTH=2
+FONT_SIZE = 14
+LABEL_SIZE = 12
+LINE_WIDTH = 2
 
-plt.rcParams.update({
-    "text.usetex": True,            # Use LaTeX for all text
-    "font.family": "serif",         # Use serif fonts (like LaTeX default)
-    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
-    "axes.labelsize": 12,           # Font size for axes labels
-    "font.size": 12,                # General font size
-    "legend.fontsize": 12,          # Font size for legend
-    "xtick.labelsize": 10,          # Font size for x tick labels
-    "ytick.labelsize": 10           # Font size for y tick labels
-})
+plt.rcParams.update(
+    {
+        "text.usetex": True,  # Use LaTeX for all text
+        "font.family": "serif",  # Use serif fonts (like LaTeX default)
+        "font.serif": [
+            "Times"
+        ],  # Use Times font (matches ACM's acmart class default)
+        "axes.labelsize": 12,  # Font size for axes labels
+        "font.size": 12,  # General font size
+        "legend.fontsize": 12,  # Font size for legend
+        "xtick.labelsize": 10,  # Font size for x tick labels
+        "ytick.labelsize": 10,  # Font size for y tick labels
+    }
+)
+
 
 def _read_kernels_results():
     result_dict = {}
@@ -110,7 +115,7 @@ def kernels(ctx):
             color=UBENCH_PLOT_COLORS[ind_kernel],
             label=kernel,
             edgecolor="black",
-            zorder =3
+            zorder=3,
         )
 
     # Labels
@@ -120,7 +125,15 @@ def kernels(ctx):
     # Horizontal line at slowdown of 1
     xlim_left = -0.5
     xlim_right = len(MPI_KERNELS_EXPERIMENT_NPROCS) - 0.5
-    ax.hlines(1, xlim_left, xlim_right, linestyle="dashed", colors="red", zorder=4, linewidth=LINE_WIDTH)
+    ax.hlines(
+        1,
+        xlim_left,
+        xlim_right,
+        linestyle="dashed",
+        colors="red",
+        zorder=4,
+        linewidth=LINE_WIDTH,
+    )
 
     # Vertical lines to separate MPI processes
     ylim_bottom = 0
@@ -138,8 +151,10 @@ def kernels(ctx):
     ax.set_xlim(left=xlim_left, right=xlim_right)
     ax.set_ylim(bottom=ylim_bottom, top=ylim_top)
     ax.set_xlabel("Number of MPI processes", fontsize=FONT_SIZE)
-    ax.set_ylabel("Slowdown \n [{} / OpenMPI]".format(SYSTEM_NAME), fontsize=FONT_SIZE)
-    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.set_ylabel(
+        "Slowdown \n [{} / OpenMPI]".format(SYSTEM_NAME), fontsize=FONT_SIZE
+    )
+    ax.tick_params(axis="both", labelsize=LABEL_SIZE)
     ax.legend(loc="upper right", ncol=4)
     ax.grid(zorder=0)
 

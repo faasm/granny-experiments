@@ -79,7 +79,7 @@ def spot(ctx):
     num_cpus_per_vm = 8
 
     results = {}
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
+    for n_vms, n_tasks in zip(num_vms, num_tasks):
         results[n_vms] = read_spot_results(n_vms, n_tasks, num_cpus_per_vm)
 
     # ----------

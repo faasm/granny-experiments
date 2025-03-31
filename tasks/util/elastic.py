@@ -189,7 +189,7 @@ def read_elastic_results(num_vms, num_tasks, num_cpus_per_vm):
             ).to_list()
 
             # Idle vCPUs
-            for (idle_cpu, ts) in zip(idle_cpus, tss):
+            for idle_cpu, ts in zip(idle_cpus, tss):
                 result_dict[baseline]["ts_vcpus"][ts] = idle_cpu
 
     return result_dict
@@ -231,7 +231,7 @@ def _do_plot_makespan(results, ax, **kwargs):
     ax.bar(xs, ys, color=colors, edgecolor="black", width=1, zorder=3)
     ax.set_ylim(bottom=0)
     ax.set_ylabel("Makespan [s]", fontsize=FONT_SIZE)
-    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.tick_params(axis="both", labelsize=LABEL_SIZE)
 
     ax.set_xticks(xticks, labels=xticklabels)
     ax.grid(zorder=0)
@@ -273,7 +273,8 @@ def _do_plot_cdf_jct(results, ax, **kwargs):
         ax.set_xlabel("Job Completion Time [s]", fontsize=FONT_SIZE)
         ax.set_ylabel("CDF", fontsize=FONT_SIZE)
         ax.set_ylim(bottom=0, top=1)
-        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+        ax.set_xlim(left=0, right=800)
+        ax.tick_params(axis="both", labelsize=LABEL_SIZE)
         ax.grid(zorder=0)
 
 
@@ -321,7 +322,7 @@ def _do_plot_percentage_vcpus(results, ax, **kwargs):
     xs = [ind for ind in range(len(num_vms))]
     xticklabels = []
 
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
+    for n_vms, n_tasks in zip(num_vms, num_tasks):
         xticklabels.append("{} VMs\n({} Jobs)".format(n_vms, n_tasks))
     for baseline in baselines:
         ys = [cumsum_ys[baseline][n_vms][1] for n_vms in num_vms]
@@ -337,9 +338,11 @@ def _do_plot_percentage_vcpus(results, ax, **kwargs):
 
     ax.set_ylim(bottom=0)
     ax.set_xlim(left=-0.25)
-    ax.set_ylabel(r'Idle CPU-seconds \\ \ Total CPU-seconds [\%]', fontsize=FONT_SIZE)
+    ax.set_ylabel(
+        r"Idle CPU-seconds \\ \ Total CPU-seconds [\%]", fontsize=FONT_SIZE
+    )
     ax.set_xticks(xs, labels=xticklabels)
-    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.tick_params(axis="both", labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -367,11 +370,11 @@ def _do_plot_ts_vcpus(results, ax, **kwargs):
             linewidth=LINE_WIDTH,
         )
 
-    ax.set_xlim(left=0, right=xlim)
+    ax.set_xlim(left=0, right=800)
     ax.set_ylim(bottom=0, top=100)
-    ax.set_ylabel(r'\% idle vCPUs', fontsize=FONT_SIZE)
+    ax.set_ylabel(r"\% idle vCPUs", fontsize=FONT_SIZE)
     ax.set_xlabel("Time [s]", fontsize=FONT_SIZE)
-    ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+    ax.tick_params(axis="both", labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 

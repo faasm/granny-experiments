@@ -90,12 +90,13 @@ def _do_plot_makespan(results, ax, **kwargs):
             colors.append("white")
 
     ax.bar(xs, ys, color=colors, edgecolor="black", width=1, zorder=3)
+    ax.set_xlim(left=-0.5, right=16.5)
     ax.set_ylim(bottom=0)
     if tight:
         ax.set_ylabel("Slowdown [Spot / No Spot]", fontsize=6)
         ax.tick_params(axis="y", labelsize=6)
     else:
-        ax.set_ylabel("Makespan Slowdown \n [Spot VMs / No Spot VMs]", fontsize=FONT_SIZE)
+        ax.set_ylabel("Makespan Slowdown", fontsize=FONT_SIZE)
 
     if tight:
         legend_entries = [
@@ -113,7 +114,7 @@ def _do_plot_makespan(results, ax, **kwargs):
         ax.set_xticks([])
     else:
         ax.set_xticks(xticks, labels=xticklabels)
-        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+        ax.tick_params(axis="both", labelsize=LABEL_SIZE)
     ax.grid(zorder=0)
 
 
@@ -197,7 +198,7 @@ def _do_plot_cost(results, ax, **kwargs):
                 edgecolor="black",
                 alpha=float(discount / 100.0),
                 width=1,
-                zorder=3
+                zorder=3,
             )
 
         # Add disccount annotation
@@ -205,14 +206,14 @@ def _do_plot_cost(results, ax, **kwargs):
             ax.text(
                 xs[-1] * 0.90,
                 ys[discount][-1] + 0.002,
-                r'{}\% off'.format(discount),
+                r"{}\% off".format(discount),
                 fontsize=6,
             )
         else:
             ax.text(
                 xs[-1] - 0.5,
                 ys[discount][-1] + 0.0001,
-                r'{}\% off'.format(discount),
+                r"{}\% off".format(discount),
             )
 
         bottom_ys = ys[discount]
@@ -225,7 +226,7 @@ def _do_plot_cost(results, ax, **kwargs):
         linestyle="-",
         marker=".",
         label="Cost without Spot VMs" if not tight else "Cost No Spot",
-        linewidth=LINE_WIDTH
+        linewidth=LINE_WIDTH,
     )
 
     ax.set_ylim(bottom=0)
@@ -238,7 +239,7 @@ def _do_plot_cost(results, ax, **kwargs):
         ax.set_ylabel("Cost [VM Hours]")
         ax.legend(fontsize=FONT_SIZE)
         ax.set_xticks(xticks, labels=xticklabels)
-        ax.tick_params(axis='both', labelsize=LABEL_SIZE)
+        ax.tick_params(axis="both", labelsize=LABEL_SIZE)
 
 
 def plot_spot_results(plot_name, results, ax, **kwargs):

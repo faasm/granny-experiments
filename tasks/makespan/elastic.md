@@ -1,7 +1,9 @@
-# Makespan Experiment (Elastic Scaling Version)
+# Improving Utilization with Elastic Policy
 
 In this experiment we study the benefits of using Granules to elastically
-scale shared memory applications when there are idle CPU cores.
+scale shared memory applications when there are idle CPU cores. We implement
+a management policy that, when an OpenMP app hits a barrier control point,
+attempts to elastically assign co-located, idle, vCPUs to the same app.
 
 For each experiment run, we increase the cluster size (in terms of number of
 VMs) and the number of jobs in the tasks, proportionally.
@@ -36,7 +38,6 @@ inv makespan.native.deploy --num-vms ${NUM_VMS}
 Now, you can run the different baselines, with and without spot VMs:
 
 ```bash
-# TODO: native batch and native slurm should be the same for OpenMP ?
 inv makespan.run.native-batch --workload omp-elastic --num-vms ${NUM_VMS} --num-tasks ${NUM_TASKS}
 inv makespan.run.native-slurm --workload omp-elastic --num-vms ${NUM_VMS} --num-tasks ${NUM_TASKS}
 ```

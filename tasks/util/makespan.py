@@ -49,9 +49,11 @@ def init_csv_file(baseline, num_vms, trace_str, num_tasks_per_user=None):
     csv_name_ic = "makespan_{}_{}_{}_{}".format(
         IDLE_CORES_FILE_PREFIX,
         baseline,
-        num_vms
-        if num_tasks_per_user is None
-        else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+        (
+            num_vms
+            if num_tasks_per_user is None
+            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+        ),
         get_trace_ending(trace_str),
     )
     ic_file = join(MAKESPAN_RESULTS_DIR, csv_name_ic)
@@ -62,9 +64,11 @@ def init_csv_file(baseline, num_vms, trace_str, num_tasks_per_user=None):
     csv_name = "makespan_{}_{}_{}_{}".format(
         EXEC_TASK_INFO_FILE_PREFIX,
         baseline,
-        num_vms
-        if num_tasks_per_user is None
-        else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+        (
+            num_vms
+            if num_tasks_per_user is None
+            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+        ),
         get_trace_ending(trace_str),
     )
     csv_file = join(MAKESPAN_RESULTS_DIR, csv_name)
@@ -78,9 +82,11 @@ def init_csv_file(baseline, num_vms, trace_str, num_tasks_per_user=None):
     csv_name = "makespan_{}_{}_{}_{}".format(
         SCHEDULING_INFO_FILE_PREFIX,
         baseline,
-        num_vms
-        if num_tasks_per_user is None
-        else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+        (
+            num_vms
+            if num_tasks_per_user is None
+            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+        ),
         get_trace_ending(trace_str),
     )
     csv_file = join(MAKESPAN_RESULTS_DIR, csv_name)
@@ -104,9 +110,11 @@ def init_csv_file(baseline, num_vms, trace_str, num_tasks_per_user=None):
     csv_name = "makespan_{}_{}_{}_{}".format(
         MAKESPAN_FILE_PREFIX,
         baseline,
-        num_vms
-        if num_tasks_per_user is None
-        else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+        (
+            num_vms
+            if num_tasks_per_user is None
+            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+        ),
         get_trace_ending(trace_str),
     )
     csv_file = join(MAKESPAN_RESULTS_DIR, csv_name)
@@ -121,9 +129,11 @@ def write_line_to_csv(
         csv_name = "makespan_{}_{}_{}_{}".format(
             IDLE_CORES_FILE_PREFIX,
             baseline,
-            num_vms
-            if num_tasks_per_user is None
-            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+            (
+                num_vms
+                if num_tasks_per_user is None
+                else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+            ),
             get_trace_ending(trace_str),
         )
         makespan_file = join(MAKESPAN_RESULTS_DIR, csv_name)
@@ -133,9 +143,11 @@ def write_line_to_csv(
         csv_name = "makespan_{}_{}_{}_{}".format(
             EXEC_TASK_INFO_FILE_PREFIX,
             baseline,
-            num_vms
-            if num_tasks_per_user is None
-            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+            (
+                num_vms
+                if num_tasks_per_user is None
+                else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+            ),
             get_trace_ending(trace_str),
         )
         makespan_file = join(MAKESPAN_RESULTS_DIR, csv_name)
@@ -145,9 +157,11 @@ def write_line_to_csv(
         csv_name = "makespan_{}_{}_{}_{}".format(
             SCHEDULING_INFO_FILE_PREFIX,
             baseline,
-            num_vms
-            if num_tasks_per_user is None
-            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+            (
+                num_vms
+                if num_tasks_per_user is None
+                else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+            ),
             get_trace_ending(trace_str),
         )
         makespan_file = join(MAKESPAN_RESULTS_DIR, csv_name)
@@ -164,9 +178,11 @@ def write_line_to_csv(
         csv_name = "makespan_{}_{}_{}_{}".format(
             MAKESPAN_FILE_PREFIX,
             baseline,
-            num_vms
-            if num_tasks_per_user is None
-            else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user),
+            (
+                num_vms
+                if num_tasks_per_user is None
+                else "{}vms_{}tpusr".format(num_vms, num_tasks_per_user)
+            ),
             get_trace_ending(trace_str),
         )
         makespan_file = join(MAKESPAN_RESULTS_DIR, csv_name)

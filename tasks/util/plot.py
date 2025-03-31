@@ -152,16 +152,13 @@ def save_plot(fig, plot_dir, plot_name):
     for plot_format in ["png", "pdf"]:
         this_plot_name = "{}.{}".format(plot_name, plot_format)
         plot_file = join(plot_dir, this_plot_name)
-        fig.savefig(plot_file, format=plot_format, bbox_inches="tight")
+        if plot_format == "png":
+            fig.savefig(
+                plot_file, format=plot_format, bbox_inches="tight", dpi=800
+            )
+        else:
+            fig.savefig(plot_file, format=plot_format, bbox_inches="tight")
         print("Plot saved to: {}".format(plot_file))
-
-        # Also make a copy in the tag directory
-        versioned_file = join(versioned_dir, this_plot_name)
-        run(
-            "cp {} {}".format(plot_file, versioned_file),
-            shell=True,
-            check=True,
-        )
 
     hostname = (
         run("hostname", shell=True, check=True, capture_output=True)

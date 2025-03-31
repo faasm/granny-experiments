@@ -30,16 +30,20 @@ from tasks.util.spot import (
     read_spot_results,
 )
 
-plt.rcParams.update({
-    "text.usetex": True,            # Use LaTeX for all text
-    "font.family": "serif",         # Use serif fonts (like LaTeX default)
-    "font.serif": ["Times"],        # Use Times font (matches ACM's acmart class default)
-    "axes.labelsize": 12,           # Font size for axes labels
-    "font.size": 12,                # General font size
-    "legend.fontsize": 12,          # Font size for legend
-    "xtick.labelsize": 10,          # Font size for x tick labels
-    "ytick.labelsize": 10           # Font size for y tick labels
-})
+plt.rcParams.update(
+    {
+        "text.usetex": True,  # Use LaTeX for all text
+        "font.family": "serif",  # Use serif fonts (like LaTeX default)
+        "font.serif": [
+            "Times"
+        ],  # Use Times font (matches ACM's acmart class default)
+        "axes.labelsize": 12,  # Font size for axes labels
+        "font.size": 12,  # General font size
+        "legend.fontsize": 12,  # Font size for legend
+        "xtick.labelsize": 10,  # Font size for x tick labels
+        "ytick.labelsize": 10,  # Font size for y tick labels
+    }
+)
 
 
 @task
@@ -59,7 +63,7 @@ def locality(ctx):
     timeseries_num_tasks = num_tasks[-1]
 
     results = {}
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
+    for n_vms, n_tasks in zip(num_vms, num_tasks):
         results[n_vms] = read_locality_results(n_vms, n_tasks, num_cpus_per_vm)
 
     # ----------
@@ -110,8 +114,7 @@ def locality(ctx):
         cdf_num_tasks=timeseries_num_tasks,
     )
 
-    # Manually craft the legend
-    baselines = ["granny-batch", "granny", "granny-migrate"]
+    baselines = ["granny", "granny-batch", "granny-migrate"]
     legend_entries = [
         Patch(
             color=get_color_for_baseline("mpi-locality", baseline),
@@ -126,8 +129,6 @@ def locality(ctx):
         bbox_to_anchor=(0.65, 0.17),
     )
 
-    save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_locality_vcpus")
-
     save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_locality_cdf_jct")
 
     # ----------
@@ -137,6 +138,20 @@ def locality(ctx):
     fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
 
     plot_locality_results("ts_vcpus", results, ax, num_vms=timeseries_num_vms)
+
+    baselines = ["granny", "granny-batch", "granny-migrate"]
+    legend_entries = [
+        Patch(
+            color=get_color_for_baseline("mpi-locality", baseline),
+            label=get_label_for_baseline("mpi-locality", baseline),
+        )
+        for baseline in baselines
+    ]
+    fig.legend(
+        handles=legend_entries,
+        ncols=1,
+        bbox_to_anchor=(0.57, 0.87),
+    )
 
     save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_locality_ts_vcpus")
 
@@ -173,7 +188,7 @@ def eviction(ctx):
     timeseries_num_users = 10
 
     results = {}
-    for (n_vms, n_users, n_tasks) in zip(num_vms, num_users, num_tasks):
+    for n_vms, n_users, n_tasks in zip(num_vms, num_users, num_tasks):
         results[n_vms] = read_eviction_results(
             n_vms, n_users, n_tasks, num_cpus_per_vm
         )
@@ -222,7 +237,7 @@ def spot(ctx):
     num_cpus_per_vm = 8
 
     results = {}
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
+    for n_vms, n_tasks in zip(num_vms, num_tasks):
         results[n_vms] = read_spot_results(n_vms, n_tasks, num_cpus_per_vm)
 
     fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_HALF)
@@ -240,7 +255,7 @@ def spot(ctx):
     )
 
     # Manually craft the legend
-    baselines = ["slurm", "batch", "granny"]
+    baselines = ["slurm"]  # , "batch"] # , "granny"]
     legend_entries = [
         Patch(
             color=get_color_for_baseline("mpi-spot", baseline),
@@ -298,7 +313,7 @@ def elastic(ctx):
     cdf_num_tasks = timeseries_num_tasks
 
     results = {}
-    for (n_vms, n_tasks) in zip(num_vms, num_tasks):
+    for n_vms, n_tasks in zip(num_vms, num_tasks):
         results[n_vms] = read_elastic_results(n_vms, n_tasks, num_cpus_per_vm)
 
     # ----------
