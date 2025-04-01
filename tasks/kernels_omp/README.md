@@ -1,11 +1,11 @@
-# ParRes Kernels Experiment (OpenMP)
+# ParRes Kernels Experiment - OpenMP (Fig.10)
 
 This experiment runs a set of the [ParRes Kernels](https://github.com/ParRes/Kernels)
 as a microbenchmark for Granny's OpenMP implementation.
 
 ## Start AKS cluster
 
-In the `experiment-base` terminal, run:
+Create a new cluster:
 
 ```bash
 inv cluster.provision --vm Standard_D8_v5 --nodes 2 cluster.credentials
@@ -63,8 +63,9 @@ To plot the results, just run:
 inv kernels-omp.plot
 ```
 
-the plot will be available in [`./plots/kernels-omp/openmp_kernels_slowdown.pdf`](
-./plots/kernels-omp/openmp_kernels_slowdown.pdf).
+the plot will be available in [`/plots/kernels-omp/openmp_kernels_slowdown.pdf`](/plots/kernels-omp/openmp_kernels_slowdown.pdf), we also include it below:
+
+![OpenMP Kernels Slowdown Plot](/plots/kernels-omp/openmp_kernels_slowdown.png)
 
 ## Clean-up
 

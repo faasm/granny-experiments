@@ -18,7 +18,9 @@ def deploy(ctx, backend="k8s", num_vms=1, num_cores_per_vm=8, ctrs_per_vm=1):
     num_cores_per_ctr = int(num_cores_per_vm / ctrs_per_vm)
     if backend == "k8s":
         deploy_native_mpi(
-            "polybench", FAABRIC_EXP_IMAGE_NAME, num_ctrs, num_cores_per_ctr
+            "polybench",
+            FAABRIC_EXP_IMAGE_NAME,
+            num_ctrs,
         )
 
         wait_for_pods(
@@ -35,11 +37,12 @@ def delete(ctx, backend="k8s", num_vms=2, num_cores_per_vm=8, ctrs_per_vm=1):
     Delete the LAMMPS native MPI setup from K8s
     """
     num_ctrs = int(num_vms) * int(ctrs_per_vm)
-    num_cores_per_ctr = int(num_cores_per_vm / ctrs_per_vm)
 
     if backend == "k8s":
         delete_native_mpi(
-            "polybench", FAABRIC_EXP_IMAGE_NAME, num_ctrs, num_cores_per_ctr
+            "polybench",
+            FAABRIC_EXP_IMAGE_NAME,
+            num_ctrs,
         )
     else:
         raise RuntimeError("Compose backend not implemented!")
