@@ -5,28 +5,29 @@ from subprocess import run
 from tasks.util.env import PLOTS_ROOT
 from tasks.util.faasm import get_faasm_version
 
+# Updating colors for CSG thesis.
 _PLOT_COLORS = {
-    "granny": (1, 0.4, 0.4),
-    "granny-no-migrate": (0.29, 0.63, 0.45),
-    "granny-no-elastic": (0.29, 0.63, 0.45),
-    "batch": (0.2, 0.6, 1.0),
-    "slurm": (0.3, 0.3, 0.3),
+    "granny": (0.8353, 0.3686, 0.0000),  # (1, 0.4, 0.4),
+    "granny-no-migrate": (0.0000, 0.4471, 0.6980),  # (0.29, 0.63, 0.45),
+    "granny-no-elastic": (0.0000, 0.4471, 0.6980),  # (0.29, 0.63, 0.45),
+    "batch": (0.0000, 0.6196, 0.4510),  # (0.2, 0.6, 1.0),
+    "slurm": (0.9020, 0.6235, 0.0000),  # (0.3, 0.3, 0.3),
 }
 
 UBENCH_PLOT_COLORS = [
-    (1, 0.4, 0.4),
-    (0.29, 0.63, 0.45),
-    (0.2, 0.6, 1.0),
-    (0.3, 0.3, 0.3),
-    (0.6, 0.4, 1.0),
-    (1.0, 0.8, 0.4),
+    (0.8353, 0.3686, 0.0000),  # (1, 0.4, 0.4),
+    (0.0000, 0.4471, 0.6980),  # (0.29, 0.63, 0.45),
+    (0.0000, 0.6196, 0.4510),  # (0.2, 0.6, 1.0),
+    (0.9020, 0.6235, 0.0000),  # (0.3, 0.3, 0.3),
+    (0.8000, 0.4745, 0.6549),  # (0.6, 0.4, 1.0),
+    (0.6000, 0.6000, 0.6000),  # (1.0, 0.8, 0.4),
 ]
 
 PLOT_PATTERNS = ["//", "\\\\", "||", "-", "*-", "o-"]
 SINGLE_COL_FIGSIZE = (6, 3)
 SINGLE_COL_FIGSIZE_HALF = (3, 3)
 DOUBLE_COL_FIGSIZE_HALF = SINGLE_COL_FIGSIZE
-DOUBLE_COL_FIGSIZE_THIRD = (4, 4)
+DOUBLE_COL_FIGSIZE_THIRD = (4, 2.5)
 
 
 def fix_hist_step_vertical_line_at_end(ax):

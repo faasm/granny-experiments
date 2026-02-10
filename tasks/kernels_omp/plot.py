@@ -134,7 +134,7 @@ def plot(ctx):
         "Slowdown \n [{} / OpenMP]".format(SYSTEM_NAME), fontsize=FONT_SIZE
     )
     ax.legend(
-        loc="upper right", ncol=5, bbox_to_anchor=(1.02, 1.20), fontsize=10
+        loc="upper right", ncol=5, bbox_to_anchor=(1.02, 1.20), fontsize=10, frameon=False
     )
     ax.grid(zorder=0)
     ax.tick_params(axis="both", labelsize=LABEL_SIZE)

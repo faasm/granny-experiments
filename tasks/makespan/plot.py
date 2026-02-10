@@ -114,20 +114,20 @@ def locality(ctx):
         cdf_num_tasks=timeseries_num_tasks,
     )
 
-    baselines = ["granny", "granny-batch", "granny-migrate"]
-    legend_entries = [
-        Patch(
-            color=get_color_for_baseline("mpi-locality", baseline),
-            label=get_label_for_baseline("mpi-locality", baseline),
-        )
-        for baseline in baselines
-    ]
-    fig.legend(
-        handles=legend_entries,
-        loc="lower center",
-        ncols=2,
-        bbox_to_anchor=(0.65, 0.17),
-    )
+#     baselines = ["granny", "granny-batch", "granny-migrate"]
+#     legend_entries = [
+#         Patch(
+#             color=get_color_for_baseline("mpi-locality", baseline),
+#             label=get_label_for_baseline("mpi-locality", baseline),
+#         )
+#         for baseline in baselines
+#     ]
+#     fig.legend(
+#         handles=legend_entries,
+#         loc="lower center",
+#         ncols=2,
+#         bbox_to_anchor=(0.65, 0.17),
+#     )
 
     save_plot(fig, MAKESPAN_PLOTS_DIR, "makespan_locality_cdf_jct")
 
@@ -240,7 +240,7 @@ def spot(ctx):
     for n_vms, n_tasks in zip(num_vms, num_tasks):
         results[n_vms] = read_spot_results(n_vms, n_tasks, num_cpus_per_vm)
 
-    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_HALF)
+    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
 
     # ----------
     # Plot 1: makespan slowdown (spot / no spot)
@@ -255,7 +255,7 @@ def spot(ctx):
     )
 
     # Manually craft the legend
-    baselines = ["slurm"]  # , "batch"] # , "granny"]
+    baselines = ["slurm", "batch", "granny"]
     legend_entries = [
         Patch(
             color=get_color_for_baseline("mpi-spot", baseline),
@@ -276,7 +276,7 @@ def spot(ctx):
     # Plot 2: stacked cost bar plot (spot) + real cost (no spot)
     # ----------
 
-    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_HALF)
+    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
 
     plot_spot_results(
         "cost",

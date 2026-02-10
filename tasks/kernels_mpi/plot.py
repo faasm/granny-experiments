@@ -12,7 +12,7 @@ from tasks.util.kernels import (
     MPI_KERNELS_PLOTS_DIR,
     MPI_KERNELS_RESULTS_DIR,
 )
-from tasks.util.plot import UBENCH_PLOT_COLORS, SINGLE_COL_FIGSIZE, save_plot
+from tasks.util.plot import UBENCH_PLOT_COLORS, DOUBLE_COL_FIGSIZE_THIRD, save_plot
 
 FONT_SIZE = 14
 LABEL_SIZE = 12
@@ -26,7 +26,7 @@ plt.rcParams.update(
             "Times"
         ],  # Use Times font (matches ACM's acmart class default)
         "axes.labelsize": 12,  # Font size for axes labels
-        "font.size": 12,  # General font size
+        "font.size": 8,  # General font size
         "legend.fontsize": 12,  # Font size for legend
         "xtick.labelsize": 10,  # Font size for x tick labels
         "ytick.labelsize": 10,  # Font size for y tick labels
@@ -66,7 +66,7 @@ def kernels(ctx):
     """
     result_dict = _read_kernels_results()
     makedirs(MPI_KERNELS_PLOTS_DIR, exist_ok=True)
-    fig, ax = subplots(figsize=SINGLE_COL_FIGSIZE)
+    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
 
     num_kernels = len(MPI_KERNELS_FAASM_FUNCS)
     width = float(1 / (num_kernels + 1))
@@ -155,7 +155,19 @@ def kernels(ctx):
         "Slowdown \n [{} / OpenMPI]".format(SYSTEM_NAME), fontsize=FONT_SIZE
     )
     ax.tick_params(axis="both", labelsize=LABEL_SIZE)
-    ax.legend(loc="upper right", ncol=4)
     ax.grid(zorder=0)
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(
+        handles,
+        labels,
+        loc="upper center",
+        bbox_to_anchor=(0.61, 0.92),
+        ncol=4,
+        fontsize=9,
+        frameon=False,
+        handlelength=1,
+        columnspacing=1,
+    )
 
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
     save_plot(fig, MPI_KERNELS_PLOTS_DIR, "mpi_kernels_slowdown")

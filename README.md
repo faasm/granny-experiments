@@ -26,7 +26,7 @@ so we add a quick command to re-generate the plot.
 | Fig 6 | [Improving locality with compaction policy](./tasks/makespan/locality.md) | inv makespan.plot.locality |
 | Fig 7 | [Improving utilization with elastic policy](./tasks/makespan/elastic.md) | inv makespan.plot.elastic |
 | Fig 8 | [Ephemeral VMs with spot policy](./tasks/makespan/spot.md) | inv makespan.plot.spot |
-| Fig 9 | MPI backend performance [MPI Kernels](./tasks/kernels_mpi/README.md.md) and [LAMMPS](./tasks/lammps/README.md) | inv makespan.plot.spot |
-| Fig 10 | [OpenMP backend performance](./tasks/kernels_omp/README.md) | inv makespan.plot.spot |
+| Fig 9 | MPI backend performance [MPI Kernels](./tasks/kernels_mpi/README.md.md) and [LAMMPS](./tasks/lammps/README.md) | inv lammps.plot kernels-mpi.plot |
+| Fig 10 | [OpenMP backend performance](./tasks/kernels_omp/README.md) | inv kernels-omp.plot |
 | Fig 11 | [Speedup when migrating Granules](./tasks/migration/README.md) | inv migration.plot |
 | Fig 12 | [Speedup when elastically scaling to more vCPUs](./tasks/elastic/README.md) | inv elastic.plot |

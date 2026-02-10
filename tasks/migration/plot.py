@@ -8,7 +8,7 @@ from os.path import join
 from pandas import read_csv
 from tasks.util.env import PROJ_ROOT
 from tasks.util.migration import MIGRATION_PLOTS_DIR
-from tasks.util.plot import UBENCH_PLOT_COLORS, save_plot
+from tasks.util.plot import DOUBLE_COL_FIGSIZE_THIRD, UBENCH_PLOT_COLORS, save_plot
 
 
 ALL_WORKLOADS = [
@@ -79,7 +79,7 @@ def plot(ctx):
 
 
 def do_plot(workload, migration_results):
-    fig, ax = subplots(figsize=(3, 2))
+    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
     xs = [0, 2, 4, 6, 8]
     xticks = arange(1, 6)
     width = 0.5

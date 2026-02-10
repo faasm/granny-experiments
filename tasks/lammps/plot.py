@@ -11,7 +11,7 @@ from tasks.util.lammps import (
     LAMMPS_RESULTS_DIR,
     LAMMPS_SIM_WORKLOAD_CONFIGS,
 )
-from tasks.util.plot import UBENCH_PLOT_COLORS, SINGLE_COL_FIGSIZE, save_plot
+from tasks.util.plot import UBENCH_PLOT_COLORS, DOUBLE_COL_FIGSIZE_THIRD, save_plot
 
 FONT_SIZE = 14
 LABEL_SIZE = 12
@@ -71,7 +71,7 @@ def plot(ctx, plot_elapsed_times=True):
     num_workloads = len(workloads)
     num_procs = result_dict["granny"]["network"]["world-size"]
 
-    fig, ax = subplots(figsize=SINGLE_COL_FIGSIZE)
+    fig, ax = subplots(figsize=DOUBLE_COL_FIGSIZE_THIRD)
     width = 0.3
     for workload_ind, workload in enumerate(workloads):
         x_wload_offset = (
